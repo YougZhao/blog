@@ -4,7 +4,7 @@ permalink:      /:year/:month/:day/:title
 # Setup
 title:          AI-Ops
 paginate:       5
-baseurl:        "/AI-Ops"
+baseurl:        "/blog"
 url:            "https://yougzhao.github.com/"
 
 # Assets
