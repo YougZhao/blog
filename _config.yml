@@ -3,6 +3,7 @@ permalink:      /:year/:month/:day/:title
 
 # Setup
 title:          AI-Ops
+tagline:        UnionPay ML Lab
 paginate:       5
 baseurl:        "/blog"
 url:            "https://yougzhao.github.com/"
