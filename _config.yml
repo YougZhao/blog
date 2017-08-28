@@ -5,8 +5,10 @@ permalink:      /:year/:month/:day/:title
 title:          AI-Ops
 tagline:        UnionPay AI-Ops Lab
 paginate:       5
-baseurl:        "/blog"
-url:            "https://yougzhao.github.com/"
+#baseurl:        "/blog"
+#url:            "https://yougzhao.github.com/"
+baseurl:         ""
+url:             "http://www.up082.cn/"
 
 # Assets
 sass:
