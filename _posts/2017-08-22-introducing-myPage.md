@@ -7,7 +7,7 @@ author: "Yang Zhao"
 # 主页说明
 顺带测试中文
 
-![placeholder](_images/IMG_1866.jpg)
+![有帮助的截图]({{ site.url }}/assets/test.jpg)
 
 Tale is minimal [Jekyll](https://jekyllrb.com/) theme curated for storytellers. It is designed and developed by [myself](https://github.com/chesterhow/) for a friend who writes short stories.
 

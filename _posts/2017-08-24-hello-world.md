@@ -6,3 +6,5 @@ author: "Yang Zhao"
 
 ### 小天使 你好呀！
 ## 我好喜欢你～
+
+![有帮助的截图]({{ site.url }}/assets/test.jpg)
