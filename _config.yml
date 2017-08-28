@@ -8,7 +8,7 @@ paginate:       5
 #baseurl:        "/blog"
 #url:            "https://yougzhao.github.com/"
 baseurl:         ""
-url:             "http://www.up082.cn/"
+url:             "http://blog.up082.cn/"
 
 # Assets
 sass:
