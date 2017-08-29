@@ -261,3 +261,20 @@ print sess.run(y_, {y_: mnist.test.labels})[idx]
 
 
 ![pic]({{ site.url }}/assets/2017-08-28-MNIST数据集与Convolutional-Neural-Network_12.png)
+
+使用自己图片的验证结果：
+
+![pic]({{ site.url }}/assets/2017-08-28-MNIST数据集与Convolutional-Neural-Network_13.png)
+
+{% highlight python %}
+image = Image.open("1.png")
+imggray = image.convert('LA')
+imgmat = np.array(list(imggray.getdata(band=0)), float)
+imgmat = np.matrix(imgmat)
+
+print imgmat.shape
+
+print sess.run(tf.argmax(y_conv, 1), {x: imgmat})
+{% endhighlight %}
+
+![pic]({{ site.url }}/assets/2017-08-28-MNIST数据集与Convolutional-Neural-Network_14.png)
