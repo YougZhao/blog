@@ -191,5 +191,73 @@ print h_pool2
 进过这两层后，我们将输出放入全连接层。
 
 {% highlight python %}
+#modified fc layer
+#之前将得到的数据偏平化，之后再标准化
+#现在，图片尺寸减小到7x7，我们加入一个
+#有1024个神经元的全连接层，用于处理整个图片。
+#我们把池化层输出的张量reshape成一些向量，乘上权重矩阵，加上偏置，然后对其使用ReLU。
+W_fc1 = weight_variable([7 * 7 * 64, 1024])
+b_fc1 = bias_variable([1024])
 
+h_pool2_flat = tf.reshape(h_pool2, [-1, 7*7*64])
+print h_pool2_flat
+h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
+print h_fc1
 {% endhighlight %}
+
+之后再连接到最后的10个标签上，y_conv就是我们要的结果
+
+{% highlight python %}
+#最后，我们添加一个softmax层，就像前面的单层softmax regression一样
+#然后连接到我最后的10个输出上。
+W_fc2 = weight_variable([1024, 10])
+b_fc2 = bias_variable([10])
+
+#y_conv = tf.matmul(h_fc1_drop, W_fc2) + b_fc2
+y_conv = tf.matmul(h_fc1, W_fc2) + b_fc2
+
+
+print y_conv
+{% endhighlight %}
+
+使整个过程中的交叉熵最小，这样训练网络，获得需要的参数
+
+{% highlight python %}
+#计算交叉熵
+cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv))
+#使交叉熵最小化
+train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
+#计算正确率
+correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
+accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+{% endhighlight %}
+
+开始激活session，开始训练
+
+{% highlight python %}
+#开始session，训练10000次，每次将100个图片扔进去
+sess = tf.Session()
+init = tf.global_variables_initializer()
+sess.run(init)
+#mnist.test.images[1]
+for i in range(10000):
+    batch = mnist.train.next_batch(100)
+    if i % 100 == 0:
+        train_accuracy = sess.run(accuracy, {x: batch[0], y_: batch[1]})
+        print('step %d, training accuracy %g' % (i, train_accuracy))
+    sess.run(train_step, {x: batch[0], y_: batch[1]})
+    
+#随机挑出一张图片，看一下结果
+idx = randint(0, 4999)
+print "Testing idx",idx
+print sess.run(tf.argmax(y_conv, 1), {x: mnist.test.images})[idx]
+print sess.run(y_, {y_: mnist.test.labels})[idx]
+{% endhighlight %}
+
+训练结果：
+
+
+![pic]({{ site.url }}/assets/2017-08-28-MNIST数据集与Convolutional-Neural-Network_11.png)
+
+
+![pic]({{ site.url }}/assets/2017-08-28-MNIST数据集与Convolutional-Neural-Network_12.png)
