@@ -13,7 +13,7 @@ url:             "http://blog.up082.cn"
 # Assets
 sass:
   sass_dir:     _sass
-  style:        :compressed
+  #style:        :compressed
 
 # Build settings
 markdown:       kramdown
